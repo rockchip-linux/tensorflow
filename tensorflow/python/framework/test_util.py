@@ -746,14 +746,23 @@ def run_in_graph_and_eager_modes(__unused__=None,
 @tf_export("test.is_gpu_available")
 def is_gpu_available(cuda_only=False, min_cuda_compute_capability=None):
   """Returns whether TensorFlow can access a GPU.
+  
+  For example:
+  
+  ```python
+  import tensorflow as tf
+  tf.test.is_gpu_available() # True if GPU is available
+  tf.test.is_gpu_available() # False if only CPU is available
+  tf.test.is_gpu_available(cuda_only=True) # False if non-CUDA based GPU is available
+  ```
 
   Args:
     cuda_only: limit the search to CUDA gpus.
     min_cuda_compute_capability: a (major,minor) pair that indicates the minimum
-      CUDA compute capability required, or None if no requirement.
+    CUDA compute capability required, or None if no requirement.
 
   Returns:
-    True iff a gpu device of the requested kind is available.
+    a boolean(True) if a gpu device of the requested kind is available.
   """
 
   def compute_capability_from_device_desc(device_desc):
